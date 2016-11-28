@@ -55,7 +55,7 @@ mondatokra(szoveg)[-3:]
 
 # In[11]:
 
-def szavakra(mondat):
+def to_words(mondat):
     szavak = mondat.split()
     strippelt_szavak = []
     for szo in szavak:
