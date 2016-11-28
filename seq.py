@@ -67,7 +67,7 @@ def to_words(mondat):
 
 # In[4]:
 
-def feldolgoz(fajl):
+def process(fajl):
     kimenet = []
     szoveg = open(fajl).read()
     for mondat in mondatokra(szoveg):
