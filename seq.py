@@ -2,13 +2,13 @@
 # coding: utf-8
 
 # # Excercises for Day 4: Sequences
-# 
+#
 # [4.1 Strings](#4.1)
-# 
+#
 # [4.2 Lists](#4.2)
-# 
+#
 # [4.3 Dictionaries](#4.3)
-# 
+#
 # [4.4 The _collections_ module](#4.4)
 
 # ## 4.1 Strings
@@ -19,7 +19,7 @@
 
 # In[ ]:
 
-def mondatokra(szoveg):
+def to_sentence(szoveg):
     mondatok = []
     for darab1 in szoveg.split('.'):
         for darab2 in darab1.split('!'):
@@ -104,7 +104,7 @@ def joe(fajl):
                 uj_mondat.append(szo)
         kimenet.append(uj_mondat)
     return kimenet
-            
+
 
 
 # In[12]:
@@ -159,7 +159,7 @@ def transpose(matrix):
             new_row.append(old_row[i])
         new_matrix.append(new_row)
     return new_matrix
-    
+
 
 
 # ### 4.2.3
@@ -229,7 +229,7 @@ def process_data(fn):
             if genre not in data:
                 data[genre] = []
             data[genre].append((title, year))
-    return data        
+    return data
 
 
 # In[ ]:
@@ -306,7 +306,7 @@ def get_letter_dict(title, movie):
         return {'@': movie}
     else:
         return {title[0]: get_letter_dict(title[1:], movie)}
-    
+
 def build_index(data):
     letter_index = {}
     for movie in data:
@@ -319,7 +319,7 @@ def search(fn):
     data = [(title.strip(), int(year), genres.split(','))
             for title, year, genres in [line.strip().split('\t')
                                         for line in open(fn)]]
-    
+
     letter_index = build_index(data)
     letter = raw_input()
     curr_dict = letter_index[letter]
@@ -334,7 +334,7 @@ def search(fn):
                 print 'not found :('
                 break
             curr_dict = curr_dict[letter]
-        
+
 
 
 # In[ ]:
@@ -383,7 +383,7 @@ while True:
             data[full_name] = (first_name, year, hobby)
         else:
             data[last_name] = (first_name, year, hobby)
-             
+
     else:
         data[full_name] = (first_name, year, hobby)
         first_guy = data[last_name]
