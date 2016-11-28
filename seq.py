@@ -19,24 +19,26 @@
 
 
 def to_sentence(szoveg):
-    mondatok = []
-    for darab1 in szoveg.split('.'):
-        for darab2 in darab1.split('!'):
-            for darab3 in darab2.split('?'):
-                if darab3:
-                    mondatok.append(darab3)
-    return mondatok
+        mondatok = []
+        for darab1 in szoveg.split('.'):
+            for darab2 in darab1.split('!'):
+                for darab3 in darab2.split('?'):
+                    if darab3:
+                        mondatok.append(darab3)
+
+        return mondatok
 
 
 
 def mondatokra(szoveg):
-    mondatok = []
-    for punct in ".?":
-        szoveg = szoveg.strip().replace(punct, '!')
-    for mondat in szoveg.split('!'):
-        if mondat.strip():
-            mondatok.append(mondat.strip())
-    return mondatok
+        mondatok = []
+        for punct in ".?":
+                szoveg = szoveg.strip().replace(punct, '!')
+                for mondat in szoveg.split('!'):
+                    if mondat.strip():
+                        mondatok.append(mondat.strip())
+
+        return mondatok
 
 
 
@@ -51,11 +53,12 @@ mondatokra(szoveg)[-3:]
 
 
 def to_words(mondat):
-    szavak = mondat.split()
-    strippelt_szavak = []
-    for szo in szavak:
-        strippelt_szavak.append(szo.strip(",;:()"))
-    return strippelt_szavak
+        szavak = mondat.split()
+        strippelt_szavak = []
+        for szo in szavak:
+                strippelt_szavak.append(szo.strip(",;:()"))
+
+        return strippelt_szavak
 
 
 # Use the last two functions in one that takes a filename as its argument and returns the text in the file as a list of lists. Test it on the file "data/sample_text.txt"
@@ -65,8 +68,9 @@ def process(fajl):
     kimenet = []
     szoveg = open(fajl).read()
     for mondat in mondatokra(szoveg):
-        szavak = szavakra(mondat)
-        kimenet.append(szavak)
+            szavak = szavakra(mondat)
+            kimenet.append(szavak)
+
     return kimenet
 
 
@@ -82,18 +86,19 @@ adat = feldolgoz('Sequences/data/sample_text.txt')
 
 
 def joe(fajl):
-    kimenet = []
-    adat = feldolgoz(fajl)
-    for mondat in adat:
-        uj_mondat = []
-        uj_mondat.append(mondat[0])
-        for szo in mondat[1:]:
-            if szo.istitle():
-                uj_mondat.append("Joe")
-            else:
-                uj_mondat.append(szo)
-        kimenet.append(uj_mondat)
-    return kimenet
+        kimenet = []
+        adat = feldolgoz(fajl)
+        for mondat in adat:
+                uj_mondat = []
+                uj_mondat.append(mondat[0])
+                for szo in mondat[1:]:
+                    if szo.istitle():
+                        uj_mondat.append("Joe")
+                    else:
+                        uj_mondat.append(szo)
+                        kimenet.append(uj_mondat)
+
+        return kimenet
 
 
 
@@ -116,11 +121,11 @@ joe('Sequences/data/sample_text.txt')[-3:]
 
 
 def is_symmetric(matrix):
-    n = len(matrix)
-    for i in range(n):
-        for j in range(n):
-            ... matrix[i][j] ...
-            ...
+        n = len(matrix)
+        for i in range(n):
+            for j in range(n):
+                ... matrix[i][j] ...
+                ...
 
 
 
@@ -135,15 +140,16 @@ print is_symmetric(test_matrix2)
 
 
 def transpose(matrix):
-    n = len(matrix)
-    k = len(matrix[0])
-    new_matrix = []
-    for i in range(k):
-        new_row = []
-        for old_row in matrix:
-            new_row.append(old_row[i])
-        new_matrix.append(new_row)
-    return new_matrix
+        n = len(matrix)
+        k = len(matrix[0])
+        new_matrix = []
+        for i in range(k):
+                new_row = []
+                for old_row in matrix:
+                        new_row.append(old_row[i])
+                        new_matrix.append(new_row)
+
+        return new_matrix
 
 
 
@@ -152,9 +158,10 @@ def transpose(matrix):
 
 
 def transpose(matrix):
-    n = len(matrix)
-    m = len(matrix[0])
-    return [[matrix[i][j] for i in range(n)] for j in range(m)]
+        n = len(matrix)
+        m = len(matrix[0])
+
+return [[matrix[i][j] for i in range(n)] for j in range(m)]
 
 
 
@@ -194,18 +201,19 @@ transpose(test_matrix)
 
 
 def process_data(fn):
-    data = {}
-    f = open(fn)
-    for line in f:
-        title, year, genres = line.strip().split('\t')
-        title = title.strip()
-        year = int(year)
-        genres = genres.split(",")
-        for genre in genres:
-            if genre not in data:
-                data[genre] = []
-            data[genre].append((title, year))
-    return data
+        data = {}
+        f = open(fn)
+        for line in f:
+                title, year, genres = line.strip().split('\t')
+                title = title.strip()
+                year = int(year)
+                genres = genres.split(",")
+                for genre in genres:
+                    if genre not in data:
+                        data[genre] = []
+                        data[genre].append((title, year))
+
+        return data
 
 
 
@@ -227,49 +235,52 @@ data['horror'][:5]
 
 
 def build_index(data):
-    letter_index = {}
-    for movie in data:
-        title = movie[0]
-        try:
-            a, b, c = title[:3]
-        except ValueError:
+        letter_index = {}
+        for movie in data:
+                title = movie[0]
+            try:
+                a, b, c = title[:3]
+            except ValueError:
             print "skipping: {0}".format(title)
             continue
-        if a not in letter_index:
-            letter_index[a] = {}
-        if b not in letter_index[a]:
-            letter_index[a][b] = {}
-        if c not in letter_index[a][b]:
-            letter_index[a][b][c] = []
-        letter_index[a][b][c].append(movie)
-    return letter_index
+            if a not in letter_index:
+                letter_index[a] = {}
+            if b not in letter_index[a]:
+                letter_index[a][b] = {}
+            if c not in letter_index[a][b]:
+                letter_index[a][b][c] = []
+                letter_index[a][b][c].append(movie)
+
+        return letter_index
 
 def search(fn):
-    data = [(title.strip(), int(year), genres.split(','))
+    data = [(title.strip(), int(year),
+            genres.split(','))
             for title, year, genres in [line.strip().split('\t')
-                                        for line in open(fn)]]
-    letter_index = build_index(data)
-    letter1 = raw_input()
-    print letter_index[letter1]
-    letter2 = raw_input()
-    print letter_index[letter1][letter2]
-    letter3 = raw_input()
-    print letter_index[letter1][letter2][letter3]
+                for line in open(fn)]]
+                    letter_index = build_index(data)
+                    letter1 = raw_input()
+                    print letter_index[letter1]
+                    letter2 = raw_input()
+                    print letter_index[letter1][letter2]
+                    letter3 = raw_input()
+                    print letter_index[letter1][letter2][letter3]
 
 
 
 def unify_dicts(dict1, dict2):
-    dict3 = {}
-    dict3.update(dict1)
-    for key, value in dict2.items():
-        if key not in dict3:
-            dict3[key] = value
-        else:
+        dict3 = {}
+        dict3.update(dict1)
+        for key, value in dict2.items():
+            if key not in dict3:
+                dict3[key] = value
+            else:
             if not isinstance(dict3[key], dict):
                 dict3[key] = value
             else:
                 dict3[key] = unify_dicts(dict3[key], value)
-    return dict3
+
+        return dict3
 
 def get_letter_dict(title, movie):
     if not title:
@@ -278,32 +289,32 @@ def get_letter_dict(title, movie):
         return {title[0]: get_letter_dict(title[1:], movie)}
 
 def build_index(data):
-    letter_index = {}
-    for movie in data:
-        title = movie[0]
-        d = get_letter_dict(title, movie)
-        letter_index = unify_dicts(letter_index, d)
-    return letter_index
+        letter_index = {}
+        for movie in data:
+                title = movie[0]
+                d = get_letter_dict(title, movie)
+                letter_index = unify_dicts(letter_index, d)
+
+        return letter_index
 
 def search(fn):
-    data = [(title.strip(), int(year), genres.split(','))
-            for title, year, genres in [line.strip().split('\t')
-                                        for line in open(fn)]]
-
-    letter_index = build_index(data)
-    letter = raw_input()
-    curr_dict = letter_index[letter]
-    while True:
-        print curr_dict
-        if '@' in curr_dict:
-            print curr_dict['@']
-            break
-        else:
-            letter = raw_input()
-            if letter not in curr_dict:
+        data = [(title.strip(), int(year), genres.split(','))
+        for title, year, genres in [line.strip().split('\t')
+            for line in open(fn)]]
+                letter_index = build_index(data)
+                letter = raw_input()
+                curr_dict = letter_index[letter]
+        while True:
+            print curr_dict
+            if '@' in curr_dict:
+                print curr_dict['@']
+                break
+            else:
+                letter = raw_input()
+                if letter not in curr_dict:
                 print 'not found('
                 break
-            curr_dict = curr_dict[letter]
+                curr_dict = curr_dict[letter]
 
 
 
@@ -350,13 +361,13 @@ while True:
         else:
             data[last_name] = (first_name, year, hobby)
 
-    else:
-        data[full_name] = (first_name, year, hobby)
-        first_guy = data[last_name]
-        first_key = "{0}_{1}".format(last_name, first_guy[0])
-        data[first_key] = first_guy
-        del data[last_name]
-    print data
+        else:
+            data[full_name] = (first_name, year, hobby)
+            first_guy = data[last_name]
+            first_key = "{0}_{1}".format(last_name, first_guy[0])
+            data[first_key] = first_guy
+            del data[last_name]
+            print data
 
 
 # ### 4.4.4
